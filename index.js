@@ -3,21 +3,24 @@ dotenv.config();
 
 const express = require("express");
 const cors = require("cors");
+const port = process.env.PORT || 5555;
+const path = require("path");
+
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "client/build")));
 
-const port = process.env.PORT || 5555;
-
-console.log("web 38 rocks");
-console.log(__dirname);
-console.log(process.env.LADY);
-console.log(process.env.FOO);
-console.log(process.env.ALWAYS);
+// in .env file, key=value pairs accessed through process.env
 console.log(process.env.PORT);
 
 app.use("/api/*", (_, res) => {
   res.json({ data: "web 38 rocks" });
+});
+
+app.use("*", (_, res) => {
+  // send back index.html so react router will work
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
 app.listen(process.env.PORT, () => {
