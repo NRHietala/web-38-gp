@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 // in .env file, key=value pairs accessed through process.env
 console.log(process.env.PORT);
+console.log(__dirname);
 
 app.use("/api/*", (_, res) => {
   res.json({ data: "web 38 rocks" });
