@@ -1,22 +1,22 @@
-const dotenv = require("dotenv");
-dotenv.config();
-
+const dotenv = require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const port = process.env.PORT || 5555;
 const path = require("path");
 
+const port = process.env.PORT || 5555;
+
 const app = express();
+
 app.use(cors());
+// express.json() is for the request
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "client/build")));
 
 // in .env file, key=value pairs accessed through process.env
 console.log(process.env.PORT);
-console.log(__dirname);
 
 app.use("/api/*", (_, res) => {
-  res.json({ data: "web 38 rocks" });
+  res.json({ data: "The API is ALIVE 👺" });
 });
 
 app.use("*", (_, res) => {
