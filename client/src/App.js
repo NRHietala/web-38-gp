@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 function url(path) {
   return process.env.NODE_ENV === "development"
-    ? `http:localhost:5000${path}`
+    ? `http://localhost:5000${path}`
     : path;
 }
 // development
@@ -16,7 +16,10 @@ function App() {
       // https://heroku.com/example
       // http://localhost:5000
       .then(res => res.json())
-      .then(goods => setData(goods.data));
+      .then(goods => setData(goods.data))
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
 
   return (
